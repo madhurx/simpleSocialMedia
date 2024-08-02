@@ -14,18 +14,18 @@ This is a simple social media application where users can create posts, like pos
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/social-media-app.git
+    git clone https://github.com/your-username/simpleSocialMedia.git
     ```
 
 2. Backend setup:
     ```bash
-    cd social-media-app/backend
+    cd simpleSocialMedia/backend
     npm install
     ```
 
 3. Create a `.env` file in the `backend` directory and add the following:
     ```
-    DB_NAME=social_media_db
+    DB_NAME=social_media_mm
     DB_USER=root
     DB_PASSWORD=password
     DB_HOST=localhost
@@ -35,19 +35,19 @@ This is a simple social media application where users can create posts, like pos
 
 4. Start the MySQL server and create the database:
     ```sql
-    CREATE DATABASE social_media_db;
+    CREATE DATABASE social_media_mm;
     ```
 
 5. Start the backend server:
     ```bash
-    node server.js
+    npm run dev
     ```
 
 6. Frontend setup:
     ```bash
     cd ../frontend
     npm install
-    npm start
+    npm run start
     ```
 
 ## Usage
