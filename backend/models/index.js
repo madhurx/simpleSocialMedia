@@ -5,7 +5,7 @@ const Follow = require('./follow');
 
 // Define associations
 User.hasMany(Post, { as: 'posts', foreignKey: 'userId' });
-User.hasMany(Like, { as: 'userLikes' });
+User.hasMany(Like, { as: 'userLikes',foreignKey: 'userId' });
 User.hasMany(Follow, { as: 'followerRelations', foreignKey: 'followerId' });
 User.hasMany(Follow, { as: 'followingRelations', foreignKey: 'followingId' });
 

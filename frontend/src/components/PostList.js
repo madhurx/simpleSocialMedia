@@ -1,32 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../context/AuthContext';
 import api from '../services/api';
 import './PostList.css';
 
-const PostList = () => {
-    const [posts, setPosts] = useState([]);
+const PostList = ({ posts }) => {
+  const { auth } = useContext(AuthContext);
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await api.get('/posts');
-                setPosts(response.data);
-            } catch (error) {
-                console.error('Failed to fetch posts');
-            }
-        };
-        fetchPosts();
-    }, []);
+  const handleLike = async (postId) => {
+    try {
+      await api.post(`/posts/${postId}/like`);
+      // Refresh the posts or update the like count accordingly
+    } catch (error) {
+      console.error('Failed to like post');
+    }
+  };
 
-    return (
-        <div className="post-list">
-            {posts.map((post) => (
-                <div key={post.id} className="post">
-                    <h3>{post.author.username}</h3>
-                    <p>{post.content}</p>
-                </div>
-            ))}
+  const handleFollow = async (userId) => {
+    console.log(userId)
+    try {
+      await api.post('/users/follow', { followingId: userId });
+      // Refresh the follow status or update the UI accordingly
+    } catch (error) {
+      console.error('Failed to follow user');
+    }
+  };
+
+  return (
+    <div className="post-list">
+      {posts && posts.map((post) => (
+        <div key={post.id} className="post bg-white p-4 mb-4 rounded shadow">
+          <h3 className="font-bold">{post.author.username}</h3>
+          <p>{post.content}</p>
+          <div className="flex justify-between mt-2">
+            <button
+              onClick={() => handleLike(post.id)}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Like
+            </button>
+            <button
+              onClick={() => handleFollow(post.userId)}
+              className="bg-green-500 text-white px-4 py-2 rounded"
+            >
+              Follow
+            </button>
+          </div>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default PostList;
