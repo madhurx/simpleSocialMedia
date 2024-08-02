@@ -4,13 +4,13 @@ const Like = require('./like');
 const Follow = require('./follow');
 
 // Define associations
-User.hasMany(Post, { as: 'posts' });
+User.hasMany(Post, { as: 'posts', foreignKey: 'userId' });
 User.hasMany(Like, { as: 'userLikes' });
 User.hasMany(Follow, { as: 'followerRelations', foreignKey: 'followerId' });
 User.hasMany(Follow, { as: 'followingRelations', foreignKey: 'followingId' });
 
 // Post.belongsTo(User, { as: 'author', foreignKey: 'userId' });
-// Post.hasMany(Like, { as: 'postLikes' });
+Post.hasMany(Like, { as: 'postLikes' ,foreignKey: 'postId'});
 
 // Like.belongsTo(User, { as: 'liker', foreignKey: 'userId' });
 // Like.belongsTo(Post, { as: 'likedPost', foreignKey: 'postId' });

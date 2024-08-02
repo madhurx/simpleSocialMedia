@@ -7,8 +7,9 @@ const Post = sequelize.define('Post', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
+    
 });
 
-// Post.belongsTo(User, { as: 'author', foreignKey: 'userId' });
+Post.belongsTo(User, { as: 'author', foreignKey: 'userId' });
 
 module.exports = Post;

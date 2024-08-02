@@ -18,12 +18,13 @@ const getPosts = async (req, res) => {
             offset: (page - 1) * limit,
             limit: parseInt(limit),
             include: [
-                { model: User, as: 'user', attributes: ['username'] },
-                { model: Like, as: 'likes' }
+                { model: User, as: 'author', attributes: ['username'] },
+                { model: Like, as: 'postLikes' }
             ],
         });
         res.status(200).json(posts);
     } catch (error) {
+      console.log(error.message)
         res.status(500).json({ message: 'Error retrieving posts' });
     }
 };
