@@ -16,7 +16,7 @@ const PostList = ({ posts }) => {
   };
 
   const handleFollow = async (userId) => {
-    console.log(userId)
+    
     try {
       await api.post('/users/follow', { followingId: userId });
       // Refresh the follow status or update the UI accordingly

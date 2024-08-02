@@ -12,7 +12,6 @@ const HomePage = () => {
       try {
         const response = await api.get(`/posts?page=${page}`);
         const data = await response.data;
-        console.log(data.posts);
         setPosts(await response.data.posts);
         setTotalPages(response.data.totalPages);
       } catch (error) {
@@ -25,7 +24,6 @@ const HomePage = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl mb-4">Home</h1>
-      {posts && console.log(posts)}
       {posts && posts.length > 0 && <PostList posts={posts} />}
       <div className="flex justify-center mt-4">
         <button

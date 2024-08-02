@@ -37,7 +37,6 @@ const getPosts = async (req, res) => {
 const likePost = async (req, res) => {
   const { postId } = req.params;
   try {
-    console.log(req.user.userId)
     const like = await Like.create({ userId: req.user.userId, postId });
     res.status(201).json(like);
   } catch (error) {
