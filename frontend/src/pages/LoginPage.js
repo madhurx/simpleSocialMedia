@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ const LoginPage = () => {
       const response = await api.post('/auth/login', { username, password });
       login(response.data.token);
     } catch (error) {
+      setError(error.response.data.message);
       console.error('Login failed');
     }
   };
@@ -38,9 +40,13 @@ const LoginPage = () => {
           className="form-input"
         />
         <button type="submit" className="form-button">Login</button>
+        {
+          error && <p className="text-red-500">{error}</p>
+        }
       </form>
       <div className="mt-4">
         <Link to="/register" className="text-blue-500">Register</Link>
+
       </div>
     </div>
   );

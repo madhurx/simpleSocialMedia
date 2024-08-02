@@ -14,7 +14,7 @@ This is a simple social media application where users can create posts, like pos
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/simpleSocialMedia.git
+    git clone https://github.com/madhurx/simpleSocialMedia.git
     ```
 
 2. Backend setup:

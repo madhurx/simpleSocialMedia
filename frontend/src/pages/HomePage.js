@@ -5,6 +5,7 @@ import PostList from '../components/PostList';
 const HomePage = () => {
   const [posts, setPosts] = useState();
   const [page, setPage] = useState(1);
+  const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
@@ -15,7 +16,8 @@ const HomePage = () => {
         setPosts(await response.data.posts);
         setTotalPages(response.data.totalPages);
       } catch (error) {
-        console.error('Failed to fetch posts');
+      setError(error.response.data.message);
+      console.error('Failed to fetch posts');
       }
     };
     fetchPosts();
@@ -25,6 +27,12 @@ const HomePage = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl mb-4">Home</h1>
       {posts && posts.length > 0 && <PostList posts={posts} />}
+      {posts && posts.length == 0 &&
+        <p className="text-center">No posts found</p>
+      }
+      {
+          error && <p className="text-red-500">{error}</p>
+        }
       <div className="flex justify-center mt-4">
         <button
           disabled={page <= 1}

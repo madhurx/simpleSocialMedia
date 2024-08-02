@@ -4,6 +4,7 @@ import './Form.css';
 
 const CreatePostPage = () => {
   const [content, setContent] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,7 +12,8 @@ const CreatePostPage = () => {
       await api.post('/posts', { content });
       setContent('');
     } catch (error) {
-      console.error('Failed to create post');
+      console.error('Failed to create post'); setError(error.response.data.message);
+
     }
   };
 
@@ -26,6 +28,9 @@ const CreatePostPage = () => {
           className="form-input"
         />
         <button type="submit" className="form-button">Post</button>
+        {
+          error && <p className="text-red-500">{error}</p>
+        }
       </form>
     </div>
   );

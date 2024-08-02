@@ -8,7 +8,7 @@ const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
-
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ const RegisterPage = () => {
       setUsername('');
       setPassword('');
     } catch (error) {
+      setError(error.response.data.message);
       console.error('Registration failed');
     }
   };
@@ -40,7 +41,9 @@ const RegisterPage = () => {
           placeholder="Password"
           className="form-input"
         />
-        <button type="submit" className="form-button">Register</button>
+        <button type="submit" className="form-button">Register</button>{
+          error && <p className="text-red-500">{error}</p>
+        }
       </form>
       <div className="mt-4">
         <Link to="/login" className="text-blue-500">Login</Link>
